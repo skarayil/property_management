@@ -1,0 +1,42 @@
+# ─── Python cache ─────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+*.pyo
+
+# ─── SQLite veritabanı (yerel veri, paylaşılmaz) ──────────────
+*.db
+*.sqlite
+*.sqlite3
+
+# ─── Kullanıcı yükleme klasörleri (büyük binary dosyalar) ─────
+emlak_fotograflari/
+musteri_evraklari/
+
+# ─── PDF raporlar ─────────────────────────────────────────────
+raporlar/
+
+# ─── macOS sistem dosyaları ───────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+
+# ─── IDE / Editor ─────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ─── Virtual environment ──────────────────────────────────────
+venv/
+.venv/
+env/
+.env
+
+# ─── Dağıtım / Build ──────────────────────────────────────────
+dist/
+build/
+*.egg-info/

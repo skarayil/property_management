@@ -1,0 +1,15 @@
+# Emlak Yönetim Sistemi – Python Bağımlılıkları
+#
+# Zorunlu (standart kütüphane ile gelir – kurulum gerekmez):
+#   tkinter, sqlite3, datetime, os, shutil, csv, webbrowser, urllib
+#
+# İsteğe bağlı (kurmadan da çalışır, sadece ilgili özellik pasif olur):
+
+# Dashboard grafikleri için (isteğe bağlı)
+matplotlib>=3.5.0
+
+# Emlak fotoğrafı önizleme için (isteğe bağlı)
+Pillow>=9.0.0
+
+# PDF rapor üretimi için (isteğe bağlı)
+fpdf>=1.7.2
