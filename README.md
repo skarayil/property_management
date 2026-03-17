@@ -87,8 +87,8 @@
 ### 1 — Repoyu Klonla
 
 ```bash
-git clone https://github.com/skarayil/emlak_app.git
-cd emlak_app
+git clone https://github.com/skarayil/property_management.git
+cd property_management
 ```
 
 ### 2 — Uygulamayı Başlat *(Ek kurulum yok!)*
