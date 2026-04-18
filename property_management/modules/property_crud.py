@@ -102,7 +102,7 @@ def favori_ekle():
     )
     conn.commit()
     conn.close()
-    messagebox.showinfo("✅", "Favori sayısı güncellendi!")
+    messagebox.showinfo("", "Favori sayısı güncellendi!")
     list_emlak()
 
 
@@ -135,7 +135,7 @@ def add_emlak(on_added_callback=None):
     global selected_photo_path
     d = _parse_form()
     if not all([d["tur"], d["konum"], d["fiyat"], d["oda_sayisi"], d["metrekare"], d["durum"]]):
-        messagebox.showerror("Eksik Bilgi", "Lütfen eksik alanları doldurduğunuzdan emin olun 😊")
+        messagebox.showerror("Eksik Bilgi", "Lütfen eksik alanları doldurduğunuzdan emin olun ")
         return
     try:
         fiyat_float = float(d["fiyat"].replace(",", ""))
@@ -155,21 +155,21 @@ def add_emlak(on_added_callback=None):
         new_id = c.lastrowid
         conn.commit()
         conn.close()
-        messagebox.showinfo("Başarılı", "Emlak eklendi! ✨")
+        messagebox.showinfo("Başarılı", "Emlak eklendi! ")
         clear_emlak_entries()
         list_emlak()
         # Portföy eşleştirme callback
         if on_added_callback:
             on_added_callback(new_id, d["tur"], fiyat_float, d["oda_sayisi"], d["durum"])
     except ValueError:
-        messagebox.showerror("Hata", "Fiyat ve metrekare sayısal olmalı 😊")
+        messagebox.showerror("Hata", "Fiyat ve metrekare sayısal olmalı ")
 
 
 def update_emlak():
     global selected_photo_path, editing_emlak_id
     d = _parse_form()
     if not all([d["tur"], d["konum"], d["fiyat"], d["oda_sayisi"], d["metrekare"], d["durum"]]):
-        messagebox.showerror("Eksik Bilgi", "Lütfen eksik alanları doldurduğunuzdan emin olun 😊")
+        messagebox.showerror("Eksik Bilgi", "Lütfen eksik alanları doldurduğunuzdan emin olun ")
         return
     try:
         fiyat_float = float(d["fiyat"].replace(",", ""))
@@ -188,19 +188,19 @@ def update_emlak():
         )
         conn.commit()
         conn.close()
-        messagebox.showinfo("Başarılı", "Emlak başarıyla güncellendi! ✨")
+        messagebox.showinfo("Başarılı", "Emlak başarıyla güncellendi! ")
         clear_emlak_entries()
         list_emlak()
         if btn_save_emlak:
-            btn_save_emlak.config(text="💾 Kaydet", command=add_emlak)
+            btn_save_emlak.config(text=" Kaydet", command=add_emlak)
     except ValueError:
-        messagebox.showerror("Hata", "Fiyat ve metrekare sayısal olmalı 😊")
+        messagebox.showerror("Hata", "Fiyat ve metrekare sayısal olmalı ")
 
 
 def edit_emlak():
     global editing_emlak_id, selected_photo_path
     if not listbox_emlak or not listbox_emlak.curselection():
-        messagebox.showerror("Uyarı", "Lütfen düzenlemek için emlak seçin 😊")
+        messagebox.showerror("Uyarı", "Lütfen düzenlemek için emlak seçin ")
         return
     emlak_id = _selected_emlak_id()
     conn = get_connection()
@@ -241,7 +241,7 @@ def edit_emlak():
     if selected_photo_path and photo_label:
         photo_label.config(text=f"Mevcut: {os.path.basename(selected_photo_path)}")
     if btn_save_emlak:
-        btn_save_emlak.config(text="✏️ Güncelle", command=update_emlak)
+        btn_save_emlak.config(text="️ Güncelle", command=update_emlak)
     conn.close()
 
 
@@ -274,7 +274,7 @@ def list_emlak():
         fav = row[15] if len(row) > 15 and row[15] else 0
         listbox_emlak.insert(
             tk.END,
-            f"ID:{row[0]} | {row[1]} | {row[2]} | {row[3]:,.0f}₺ | {row[4]} oda | {row[5]}m² | {row[6]} | ❤️{fav}",
+            f"ID:{row[0]} | {row[1]} | {row[2]} | {row[3]:,.0f}₺ | {row[4]} oda | {row[5]}m² | {row[6]} | ️{fav}",
         )
 
 
@@ -298,7 +298,7 @@ def search_emlak():
         fav = row[15] if len(row) > 15 and row[15] else 0
         listbox_emlak.insert(
             tk.END,
-            f"ID:{row[0]} | {row[1]} | {row[2]} | {row[3]:,.0f}₺ | {row[4]} oda | {row[5]}m² | {row[6]} | ❤️{fav}",
+            f"ID:{row[0]} | {row[1]} | {row[2]} | {row[3]:,.0f}₺ | {row[4]} oda | {row[5]}m² | {row[6]} | ️{fav}",
         )
 
 

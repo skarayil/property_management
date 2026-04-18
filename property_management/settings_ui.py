@@ -17,24 +17,24 @@ def show_settings(root):
     settings_window = tk.Toplevel(root)
     settings_window.title("Ayarlar")
     settings_window.geometry("400x300")
-    settings_window.configure(bg='#1e293b')
+    settings_window.configure(bg='#2c2c2c')
 
-    tk.Label(settings_window, text="⚙️ AYARLAR", font=("Arial", 16, "bold"),
-             bg='#1e293b', fg='white').pack(pady=20)
+    tk.Label(settings_window, text="️ AYARLAR", font=("Arial", 16, "bold"),
+             bg='#2c2c2c', fg='white').pack(pady=20)
 
     settings = load_settings()
 
-    tk.Label(settings_window, text="Firma Adı:", bg='#1e293b', fg='white').pack(pady=5)
+    tk.Label(settings_window, text="Firma Adı:", bg='#2c2c2c', fg='white').pack(pady=5)
     firma_entry = tk.Entry(settings_window, width=40)
     firma_entry.insert(0, settings[1])
     firma_entry.pack(pady=5)
 
-    tk.Label(settings_window, text="Email:", bg='#1e293b', fg='white').pack(pady=5)
+    tk.Label(settings_window, text="Email:", bg='#2c2c2c', fg='white').pack(pady=5)
     email_entry = tk.Entry(settings_window, width=40)
     email_entry.insert(0, settings[2] if settings[2] else "")
     email_entry.pack(pady=5)
 
-    tk.Label(settings_window, text="Şifre:", bg='#1e293b', fg='white').pack(pady=5)
+    tk.Label(settings_window, text="Şifre:", bg='#2c2c2c', fg='white').pack(pady=5)
     password_entry = tk.Entry(settings_window, width=40, show="*")
     password_entry.insert(0, settings[3] if settings[3] else "")
     password_entry.pack(pady=5)
@@ -49,8 +49,8 @@ def show_settings(root):
         messagebox.showinfo("Başarılı", "Ayarlar kaydedildi!")
         settings_window.destroy()
 
-    tk.Button(settings_window, text="💾 Kaydet", command=save_settings,
-              bg="#10b981", fg="white", width=15).pack(pady=20)
+    tk.Button(settings_window, text=" Kaydet", command=save_settings,
+              bg="#4f4f4f", fg="white", width=15).pack(pady=20)
 
 
 def send_email(to_email, subject, message):
@@ -85,10 +85,10 @@ def show_email_menu(root):
     email_window = tk.Toplevel(root)
     email_window.title("Email Gönder")
     email_window.geometry("500x400")
-    email_window.configure(bg='#1e293b')
+    email_window.configure(bg='#2c2c2c')
 
-    tk.Label(email_window, text="📧 EMAIL GÖNDER", font=("Arial", 16, "bold"),
-             bg='#1e293b', fg='white').pack(pady=15)
+    tk.Label(email_window, text=" EMAIL GÖNDER", font=("Arial", 16, "bold"),
+             bg='#2c2c2c', fg='white').pack(pady=15)
 
     conn = get_connection()
     c = conn.cursor()
@@ -98,16 +98,16 @@ def show_email_menu(root):
 
     if not musteriler:
         tk.Label(email_window, text="Email adresi olan müşteri yok!",
-                 bg='#1e293b', fg='red').pack(pady=20)
+                 bg='#2c2c2c', fg='red').pack(pady=20)
         return
 
-    tk.Label(email_window, text="Alıcı:", bg='#1e293b', fg='white').pack()
+    tk.Label(email_window, text="Alıcı:", bg='#2c2c2c', fg='white').pack()
     alici_var = tk.StringVar()
     alici_combo = ttk.Combobox(email_window, textvariable=alici_var, width=50)
     alici_combo['values'] = [f"{m[1]} - {m[2]}" for m in musteriler]
     alici_combo.pack(pady=5)
 
-    tk.Label(email_window, text="Konu:", bg='#1e293b', fg='white').pack(pady=(10, 0))
+    tk.Label(email_window, text="Konu:", bg='#2c2c2c', fg='white').pack(pady=(10, 0))
     konu_entry = tk.Entry(email_window, width=50)
     konu_entry.pack(pady=5)
 
@@ -129,5 +129,5 @@ def show_email_menu(root):
 
         threading.Thread(target=send_thread).start()
 
-    tk.Button(email_window, text="📧 Gönder", command=send_action,
-              bg="#10b981", fg="white").pack(pady=10)
+    tk.Button(email_window, text=" Gönder", command=send_action,
+              bg="#4f4f4f", fg="white").pack(pady=10)

@@ -13,7 +13,7 @@ except ImportError:
 def create_pdf_report(report_type):
     try:
         if not FPDF_AVAILABLE:
-            messagebox.showerror("Eksik Kütüphane", "FPDF kütüphanesi bulunamadı!\nLütfen terminalden 'pip install fpdf' komutunu çalıştırın 😊")
+            messagebox.showerror("Eksik Kütüphane", "FPDF kütüphanesi bulunamadı!\nLütfen terminalden 'pip install fpdf' komutunu çalıştırın ")
             return
 
         filename = f"raporlar/{report_type}_raporu_{datetime.date.today().strftime('%d_%m_%Y')}.pdf"
@@ -80,7 +80,7 @@ def create_pdf_report(report_type):
 
         conn.close()
         pdf.output(filename)
-        messagebox.showinfo("Başarılı", f"Rapor oluşturuldu:\n\n📁 {filename} ✨")
+        messagebox.showinfo("Başarılı", f"Rapor oluşturuldu:\n\n {filename} ")
 
     except Exception as e:
         messagebox.showerror("Hata", f"Rapor oluşturulamadı: {str(e)}")

@@ -61,9 +61,9 @@ def whatsapp_mesaj_gonder(listbox_musteri, mesaj_tipi: str = "genel"):
     isim, telefon = row
     mesajlar = {
         "takip": (f"Merhaba {isim} Hanım/Bey, geçtiğimiz günlerde gezdiğiniz mülkle ilgili "
-                  f"düşüncelerinizi merak ettik. Teklifiniz ya da sorunuz var mı? 🏠"),
+                  f"düşüncelerinizi merak ettik. Teklifiniz ya da sorunuz var mı? "),
         "soguk": (f"Merhaba {isim} Hanım/Bey, bir süredir iletişime geçemedik. "
-                  f"Aradığınız kriterlerde yeni fırsatlarımız var, görüşmek ister misiniz? 🔑"),
+                  f"Aradığınız kriterlerde yeni fırsatlarımız var, görüşmek ister misiniz? "),
         "genel": f"Merhaba {isim} Hanım/Bey, nasıl yardımcı olabilirim?",
     }
     webbrowser.open(_wa_url(telefon, mesajlar.get(mesaj_tipi, mesajlar["genel"])))
@@ -77,25 +77,25 @@ def show_takip_paneli(root):
     gereken randevuları listeleyen Takip Merkezi penceresi.
     """
     win = tk.Toplevel(root)
-    win.title("🔔 Takip Merkezi")
+    win.title(" Takip Merkezi")
     win.geometry("780x540")
-    win.configure(bg="#0f172a")
+    win.configure(bg="#1e1e1e")
 
     tk.Label(
-        win, text="🔔 TAKİP MERKEZİ",
-        font=("Arial", 16, "bold"), bg="#0f172a", fg="white"
+        win, text=" TAKİP MERKEZİ",
+        font=("Arial", 16, "bold"), bg="#1e1e1e", fg="white"
     ).pack(pady=12)
 
     notebook = ttk.Notebook(win)
     notebook.pack(fill=tk.BOTH, expand=True, padx=15, pady=8)
 
     # ── Tab 1: Soğuk Müşteriler ──────────────────────────────────────────────
-    tab_soguk = tk.Frame(notebook, bg="#0f172a")
-    notebook.add(tab_soguk, text="❄️ Soğuk Müşteriler")
+    tab_soguk = tk.Frame(notebook, bg="#1e1e1e")
+    notebook.add(tab_soguk, text="️ Soğuk Müşteriler")
 
     tk.Label(
         tab_soguk, text="30 gündür iletişim kurulmayan müşteriler:",
-        bg="#0f172a", fg="#94a3b8"
+        bg="#1e1e1e", fg="#94a3b8"
     ).pack(pady=5)
 
     cols_s = ("ID", "İsim", "Telefon", "Etiket", "Son İletişim")
@@ -127,21 +127,21 @@ def show_takip_paneli(root):
         vals = tree_s.item(sel[0])["values"]
         musteri_id, isim, telefon = vals[0], vals[1], vals[2]
         mesaj = (f"Merhaba {isim} Hanım/Bey, bir süredir iletişime geçemedik. "
-                 f"Aradığınız kriterlerde yeni fırsatlarımız var, görüşmek ister misiniz? 🔑")
+                 f"Aradığınız kriterlerde yeni fırsatlarımız var, görüşmek ister misiniz? ")
         webbrowser.open(_wa_url(telefon, mesaj))
         _guncelle_iletisim(musteri_id)
 
     create_modern_button(
-        tab_soguk, "💬 WhatsApp Mesajı Gönder", wa_soguk, "#25D366", width=25
+        tab_soguk, " WhatsApp Mesajı Gönder", wa_soguk, "#25D366", width=25
     ).pack(pady=8)
 
     # ── Tab 2: Gösterim Sonrası Anket ────────────────────────────────────────
-    tab_gb = tk.Frame(notebook, bg="#0f172a")
-    notebook.add(tab_gb, text="📋 Gösterim Sonrası Anket")
+    tab_gb = tk.Frame(notebook, bg="#1e1e1e")
+    notebook.add(tab_gb, text=" Gösterim Sonrası Anket")
 
     tk.Label(
         tab_gb, text="Tamamlanan gösterimler – anket gönderilmeyi bekleyenler:",
-        bg="#0f172a", fg="#94a3b8"
+        bg="#1e1e1e", fg="#94a3b8"
     ).pack(pady=5)
 
     cols_g = ("Randevu ID", "Mülk", "Müşteri", "Tarih", "Saat", "Geri Bildirim")
@@ -188,16 +188,16 @@ def show_takip_paneli(root):
         row = c3.fetchone()
         if row:
             mesaj = (f"Merhaba {musteri_isim} Hanım/Bey, gezdiğiniz mülk nasıldı? "
-                     f"Beğendiniz mi, ya da teklifiniz var mı? 😊🏠")
+                     f"Beğendiniz mi, ya da teklifiniz var mı? ")
             webbrowser.open(_wa_url(row[0], mesaj))
             c3.execute(
                 "UPDATE randevu SET gosterim_geri_bildirim = ? WHERE id = ?",
                 ("Anket Gönderildi – " + datetime.datetime.now().strftime("%d.%m.%Y %H:%M"), randevu_id),
             )
             conn3.commit()
-            messagebox.showinfo("Başarılı", "WhatsApp anketi hazırlandı! ✅", parent=win)
+            messagebox.showinfo("Başarılı", "WhatsApp anketi hazırlandı! ", parent=win)
         conn3.close()
 
     create_modern_button(
-        tab_gb, "📩 Anket WhatsApp'tan Gönder", anket_gonder, "#f59e0b", width=28
+        tab_gb, " Anket WhatsApp'tan Gönder", anket_gonder, "#6e6e6e", width=28
     ).pack(pady=8)
