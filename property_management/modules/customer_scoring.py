@@ -35,14 +35,14 @@ def hesapla_skor_ve_etiket(butce, kredi, aciliyet, tip):
 
     # Etiket belirleme
     if skor >= 75:
-        etiket = " Sıcak Alıcı"
+        etiket = "🔥 Sıcak Alıcı"
     elif skor >= 55:
-        etiket = " Yatırımcı Adayı"
+        etiket = "💼 Yatırımcı Adayı"
     elif skor >= 35:
-        etiket = " Hafta Sonu Alıcısı"
+        etiket = "📅 Hafta Sonu Alıcısı"
     elif skor >= 20:
-        etiket = " Sadece Fiyat Soran"
+        etiket = "💬 Sadece Fiyat Soran"
     else:
-        etiket = "️ Soğuk Lead"
+        etiket = "❄️ Soğuk Lead"
 
     return skor, etiket

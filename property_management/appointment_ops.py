@@ -52,13 +52,13 @@ def show_randevu_menu(root, show_main_menu_cb):
     for widget in root.winfo_children():
         widget.destroy()
 
-    main_frame = tk.Frame(root, bg='#1e1e1e')
+    main_frame = tk.Frame(root, bg='#0f172a')
     main_frame.pack(fill=tk.BOTH, expand=True, padx=15, pady=15)
 
-    tk.Label(main_frame, text=" RANDEVU YÖNETİMİ & TAKVİM",
-             font=("Arial", 16, "bold"), bg='#1e1e1e', fg='white').pack(pady=15)
+    tk.Label(main_frame, text="📅 RANDEVU YÖNETİMİ & TAKVİM",
+             font=("Arial", 16, "bold"), bg='#0f172a', fg='white').pack(pady=15)
 
-    content_frame = tk.Frame(main_frame, bg='#1e1e1e')
+    content_frame = tk.Frame(main_frame, bg='#0f172a')
     content_frame.pack(fill=tk.BOTH, expand=True)
 
     # ── Sol Panel – Form ──
@@ -95,7 +95,7 @@ def show_randevu_menu(root, show_main_menu_cb):
                     gunler = e[3] or "Belirtilmemiş"
                     saatler = e[4] or "Belirtilmemiş"
                     musaitlik_label.config(
-                        text=f" Müsait: {gunler} | ⏰ {saatler}"
+                        text=f"🗓 Müsait: {gunler} | ⏰ {saatler}"
                     )
                     break
 
@@ -113,7 +113,7 @@ def show_randevu_menu(root, show_main_menu_cb):
     musteri_combo.pack(pady=(2, 8), padx=15)
 
     tk.Label(left_panel, text="Tarih (GG.AA.YYYY):", bg='#334155', fg='#e2e8f0').pack(anchor='w', padx=15)
-    tarih_entry = tk.Entry(left_panel, width=38, bg='#2c2c2c', fg='white', insertbackground='white')
+    tarih_entry = tk.Entry(left_panel, width=38, bg='#1e293b', fg='white', insertbackground='white')
     tarih_entry.insert(0, datetime.date.today().strftime('%d.%m.%Y'))
     tarih_entry.pack(pady=(2, 8), padx=15)
 
@@ -124,7 +124,7 @@ def show_randevu_menu(root, show_main_menu_cb):
     saat_combo.pack(pady=(2, 8), padx=15)
 
     tk.Label(left_panel, text="Notlar:", bg='#334155', fg='#e2e8f0').pack(anchor='w', padx=15)
-    notlar_text = tk.Text(left_panel, width=38, height=4, bg='#2c2c2c', fg='white', insertbackground='white')
+    notlar_text = tk.Text(left_panel, width=38, height=4, bg='#1e293b', fg='white', insertbackground='white')
     notlar_text.pack(pady=(2, 8), padx=15)
 
     # ── Sağ Panel – Liste ──
@@ -185,7 +185,7 @@ def show_randevu_menu(root, show_main_menu_cb):
             # ── Çakışma Kontrolü ──
             if check_conflict(emlak_id, tarih, saat):
                 messagebox.showerror(
-                    "️ Randevu Çakışması!",
+                    "⚠️ Randevu Çakışması!",
                     f"Bu emlak için {tarih} tarihinde saat {saat}'de zaten bir randevu var!\n\n"
                     f"Lütfen farklı bir saat veya tarih seçin."
                 )
@@ -195,9 +195,9 @@ def show_randevu_menu(root, show_main_menu_cb):
             _, musait_gunler, musait_saatler = check_musait_uyum(emlak_id, tarih, saat)
             if musait_gunler or musait_saatler:
                 devam = messagebox.askyesno(
-                    " Müsaitlik Bilgisi",
+                    "📅 Müsaitlik Bilgisi",
                     f"Mülk sahibi müsaitliği:\n"
-                    f" Günler: {musait_gunler}\n"
+                    f"🗓 Günler: {musait_gunler}\n"
                     f"⏰ Saatler: {musait_saatler}\n\n"
                     f"Yine de bu saate randevu oluşturmak istiyor musunuz?"
                 )
@@ -221,7 +221,7 @@ def show_randevu_menu(root, show_main_menu_cb):
             conn4.commit()
             conn4.close()
 
-            messagebox.showinfo("Başarılı ", f"Randevu oluşturuldu!\n {tarih} – ⏰ {saat}")
+            messagebox.showinfo("Başarılı ✅", f"Randevu oluşturuldu!\n📅 {tarih} – ⏰ {saat}")
             list_randevular()
 
         except Exception as e:
@@ -260,19 +260,19 @@ def show_randevu_menu(root, show_main_menu_cb):
             list_randevular()
 
     # Randevu oluştur butonu
-    tk.Button(left_panel, text=" Randevu Oluştur", command=add_randevu,
-              bg="#4f4f4f", fg="white", font=("Arial", 11, "bold"), width=22, height=2).pack(pady=15)
+    tk.Button(left_panel, text="📅 Randevu Oluştur", command=add_randevu,
+              bg="#10b981", fg="white", font=("Arial", 11, "bold"), width=22, height=2).pack(pady=15)
 
     btn_frame = tk.Frame(right_panel, bg='#334155')
     btn_frame.pack(pady=10)
 
     row1 = tk.Frame(btn_frame, bg='#334155')
     row1.pack()
-    create_modern_button(row1, " Tamamlandı", lambda: update_durum("Tamamlandı"), "#4f4f4f").pack(side=tk.LEFT, padx=4)
-    create_modern_button(row1, " İptal", lambda: update_durum("İptal"), "#888888").pack(side=tk.LEFT, padx=4)
-    create_modern_button(row1, "️ Sil", delete_randevu, "#7f1d1d", width=8).pack(side=tk.LEFT, padx=4)
-    create_modern_button(row1, " Yenile", list_randevular, "#334155").pack(side=tk.LEFT, padx=4)
+    create_modern_button(row1, "✅ Tamamlandı", lambda: update_durum("Tamamlandı"), "#10b981").pack(side=tk.LEFT, padx=4)
+    create_modern_button(row1, "❌ İptal", lambda: update_durum("İptal"), "#ef4444").pack(side=tk.LEFT, padx=4)
+    create_modern_button(row1, "🗑️ Sil", delete_randevu, "#7f1d1d", width=8).pack(side=tk.LEFT, padx=4)
+    create_modern_button(row1, "🔄 Yenile", list_randevular, "#334155").pack(side=tk.LEFT, padx=4)
 
-    create_modern_button(root, " Ana Menü", lambda: show_main_menu_cb(root), "#5c5c5c", width=20, height=2).pack(pady=12)
+    create_modern_button(root, "🏠 Ana Menü", lambda: show_main_menu_cb(root), "#d946ef", width=20, height=2).pack(pady=12)
 
     list_randevular()

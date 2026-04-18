@@ -36,13 +36,13 @@ def show_evrak_yonetim(root, listbox_musteri):
     musteri_isim = item.split(" | ")[2]
 
     win = tk.Toplevel(root)
-    win.title(f" Evraklar – {musteri_isim}")
+    win.title(f"📁 Evraklar – {musteri_isim}")
     win.geometry("620x460")
-    win.configure(bg="#1e1e1e")
+    win.configure(bg="#0f172a")
 
     tk.Label(
-        win, text=f" {musteri_isim} – Evrak Yönetimi",
-        font=("Arial", 14, "bold"), bg="#1e1e1e", fg="white"
+        win, text=f"📁 {musteri_isim} – Evrak Yönetimi",
+        font=("Arial", 14, "bold"), bg="#0f172a", fg="white"
     ).pack(pady=14)
 
     columns = ("ID", "Evrak Adı", "Yüklenme Tarihi")
@@ -103,7 +103,7 @@ def show_evrak_yonetim(root, listbox_musteri):
         )
         conn.commit()
         conn.close()
-        messagebox.showinfo("Başarılı", f"'{evrak_adi}' evrakı yüklendi! ", parent=win)
+        messagebox.showinfo("Başarılı", f"'{evrak_adi}' evrakı yüklendi! 📎", parent=win)
         refresh_evraklar()
 
     def sil_evrak():
@@ -120,10 +120,10 @@ def show_evrak_yonetim(root, listbox_musteri):
         refresh_evraklar()
 
     # ── Butonlar ─────────────────────────────────────────────────────────────
-    btn_f = tk.Frame(win, bg="#1e1e1e")
+    btn_f = tk.Frame(win, bg="#0f172a")
     btn_f.pack(pady=10)
-    create_modern_button(btn_f, " Evrak Yükle", yukle_evrak, "#4f4f4f", width=16).pack(side=tk.LEFT, padx=8)
-    create_modern_button(btn_f, "️ Sil", sil_evrak, "#888888", width=10).pack(side=tk.LEFT, padx=8)
-    create_modern_button(btn_f, " Yenile", refresh_evraklar, "#334155", width=10).pack(side=tk.LEFT, padx=8)
+    create_modern_button(btn_f, "📎 Evrak Yükle", yukle_evrak, "#10b981", width=16).pack(side=tk.LEFT, padx=8)
+    create_modern_button(btn_f, "🗑️ Sil", sil_evrak, "#ef4444", width=10).pack(side=tk.LEFT, padx=8)
+    create_modern_button(btn_f, "🔄 Yenile", refresh_evraklar, "#334155", width=10).pack(side=tk.LEFT, padx=8)
 
     refresh_evraklar()

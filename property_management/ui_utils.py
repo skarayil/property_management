@@ -7,11 +7,11 @@ def create_modern_button(parent, text, command, bg_color, width=15, height=2):
     btn = tk.Button(parent, text=text, command=command, bg=bg_color, fg=fg_color,
                      font=("Helvetica", 12, "bold"), width=width, height=height,
                      relief="flat", cursor="hand2", borderwidth=0,
-                     activebackground="#5e5e5e", activeforeground="white",
+                     activebackground="#3b82f6", activeforeground="white",
                      highlightthickness=0, pady=5)
     
     def on_enter(e):
-        e.widget.config(bg="#3a3a3a", fg="white") # dark metallic gray on hover
+        e.widget.config(bg="#475569", fg="white") # slate-600 on hover
 
     def on_leave(e):
         e.widget.config(bg=bg_color, fg=fg_color)

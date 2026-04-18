@@ -53,7 +53,7 @@ def _build_musteri_from_form():
 def add_musteri():
     d = _build_musteri_from_form()
     if not (d["isim"] and d["telefon"]):
-        messagebox.showerror("Eksik Bilgi", "Lütfen isim ve telefon bilgilerini eksiksiz doldurun ")
+        messagebox.showerror("Eksik Bilgi", "Lütfen isim ve telefon bilgilerini eksiksiz doldurun 😊")
         return
 
     skor, etiket = hesapla_skor_ve_etiket(d["butce"], d["kredi"], d["aciliyet"], d["tip"])
@@ -74,7 +74,7 @@ def add_musteri():
 
     messagebox.showinfo(
         "Başarılı",
-        f"Müşteri eklendi! \n\n️ Etiket: {etiket}\n⭐ Müşteri Skoru: {skor}/100",
+        f"Müşteri eklendi! ✨\n\n🏷️ Etiket: {etiket}\n⭐ Müşteri Skoru: {skor}/100",
     )
     clear_musteri_entries()
     list_musteri()
@@ -83,7 +83,7 @@ def add_musteri():
 def update_musteri():
     d = _build_musteri_from_form()
     if not (d["isim"] and d["telefon"]):
-        messagebox.showerror("Eksik Bilgi", "Lütfen isim ve telefon bilgilerini eksiksiz doldurun ")
+        messagebox.showerror("Eksik Bilgi", "Lütfen isim ve telefon bilgilerini eksiksiz doldurun 😊")
         return
 
     skor, etiket = hesapla_skor_ve_etiket(d["butce"], d["kredi"], d["aciliyet"], d["tip"])
@@ -103,17 +103,17 @@ def update_musteri():
     conn.commit()
     conn.close()
 
-    messagebox.showinfo("Başarılı", f"Müşteri güncellendi! \n️ Yeni Etiket: {etiket}\n⭐ Skor: {skor}/100")
+    messagebox.showinfo("Başarılı", f"Müşteri güncellendi! ✨\n🏷️ Yeni Etiket: {etiket}\n⭐ Skor: {skor}/100")
     clear_musteri_entries()
     list_musteri()
     if btn_save_musteri:
-        btn_save_musteri.config(text=" Kaydet", command=add_musteri)
+        btn_save_musteri.config(text="💾 Kaydet", command=add_musteri)
 
 
 def delete_musteri():
     selected = listbox_musteri.curselection()
     if not selected:
-        messagebox.showerror("Uyarı", "Lütfen silmek için bir müşteri seçin ")
+        messagebox.showerror("Uyarı", "Lütfen silmek için bir müşteri seçin 😊")
         return
     if not messagebox.askyesno("Onay", "Müşteri kaydını silmek istediğinizden emin misiniz?"):
         return
@@ -124,7 +124,7 @@ def delete_musteri():
     c.execute("DELETE FROM musteri WHERE id = ?", (musteri_id,))
     conn.commit()
     conn.close()
-    messagebox.showinfo("Başarılı", "Müşteri başarıyla silindi! ️")
+    messagebox.showinfo("Başarılı", "Müşteri başarıyla silindi! 🗑️")
     list_musteri()
 
 
@@ -132,7 +132,7 @@ def edit_musteri():
     global editing_musteri_id
     selected = listbox_musteri.curselection()
     if not selected:
-        messagebox.showerror("Uyarı", "Lütfen düzenlemek için bir müşteri seçin ")
+        messagebox.showerror("Uyarı", "Lütfen düzenlemek için bir müşteri seçin 😊")
         return
 
     musteri_id = _selected_musteri_id()
@@ -162,7 +162,7 @@ def edit_musteri():
 
     editing_musteri_id = musteri_id
     if btn_save_musteri:
-        btn_save_musteri.config(text="️ Güncelle", command=update_musteri)
+        btn_save_musteri.config(text="✏️ Güncelle", command=update_musteri)
 
 
 def list_musteri(search_term=None):

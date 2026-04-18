@@ -17,12 +17,12 @@ def show_dashboard(root):
         return
 
     dash_window = tk.Toplevel(root)
-    dash_window.title(" Dashboard & Performans Analitiği")
+    dash_window.title("📊 Dashboard & Performans Analitiği")
     dash_window.geometry("1100x700")
-    dash_window.configure(bg='#1e1e1e')
+    dash_window.configure(bg='#0f172a')
 
-    tk.Label(dash_window, text=" PERFORMANS ANALİTİĞİ DASHBOARD",
-             font=("Arial", 18, "bold"), bg='#1e1e1e', fg='white').pack(pady=10)
+    tk.Label(dash_window, text="📊 PERFORMANS ANALİTİĞİ DASHBOARD",
+             font=("Arial", 18, "bold"), bg='#0f172a', fg='white').pack(pady=10)
 
     # ── KPI Kartları ──
     conn = get_connection()
@@ -51,7 +51,7 @@ def show_dashboard(root):
     randevu_tamamlanma = (tamamlanan_randevu / toplam_randevu * 100) if toplam_randevu > 0 else 0
 
     # Stat cards row
-    stats_frame = tk.Frame(dash_window, bg='#1e1e1e')
+    stats_frame = tk.Frame(dash_window, bg='#0f172a')
     stats_frame.pack(fill=tk.X, padx=20, pady=5)
 
     def kpi_card(parent, title, value, color, row, col):
@@ -62,35 +62,35 @@ def show_dashboard(root):
                  wraplength=130).pack(pady=(8, 2))
         tk.Label(card, text=str(value), font=("Arial", 15, "bold"), bg=color, fg="white").pack()
 
-    kpi_card(stats_frame, " Toplam Emlak", toplam_emlak, "#5e5e5e", 0, 0)
-    kpi_card(stats_frame, " Satılık", satilik, "#4f4f4f", 0, 1)
-    kpi_card(stats_frame, " Kiralık", kiralik, "#6e6e6e", 0, 2)
-    kpi_card(stats_frame, " Satıldı/Kiralandı", satildi, "#22c55e", 0, 3)
-    kpi_card(stats_frame, " Müşteri", toplam_musteri, "#7d7d7d", 0, 4)
-    kpi_card(stats_frame, " Randevu Tamamlanma", f"%{randevu_tamamlanma:.0f}", "#555555", 0, 5)
-    kpi_card(stats_frame, " Dönüşüm Oranı", f"%{donusum_orani:.0f}", "#f43f5e", 0, 6)
-    kpi_card(stats_frame, " Toplam Komisyon", f"{toplam_komisyon:,.0f}₺", "#5c5c5c", 1, 0)
+    kpi_card(stats_frame, "🏠 Toplam Emlak", toplam_emlak, "#3b82f6", 0, 0)
+    kpi_card(stats_frame, "💚 Satılık", satilik, "#10b981", 0, 1)
+    kpi_card(stats_frame, "🟡 Kiralık", kiralik, "#f59e0b", 0, 2)
+    kpi_card(stats_frame, "✅ Satıldı/Kiralandı", satildi, "#22c55e", 0, 3)
+    kpi_card(stats_frame, "👥 Müşteri", toplam_musteri, "#8b5cf6", 0, 4)
+    kpi_card(stats_frame, "📅 Randevu Tamamlanma", f"%{randevu_tamamlanma:.0f}", "#0ea5e9", 0, 5)
+    kpi_card(stats_frame, "🎯 Dönüşüm Oranı", f"%{donusum_orani:.0f}", "#f43f5e", 0, 6)
+    kpi_card(stats_frame, "💰 Toplam Komisyon", f"{toplam_komisyon:,.0f}₺", "#d946ef", 1, 0)
 
     # ── Notebook ile birden fazla grafik ──
     notebook = ttk.Notebook(dash_window)
     notebook.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
 
     # ── Tab 1: Genel Grafiler ──
-    tab1 = tk.Frame(notebook, bg='#2c2c2c')
-    notebook.add(tab1, text=" Emlak Analizi")
+    tab1 = tk.Frame(notebook, bg='#1e293b')
+    notebook.add(tab1, text="🏠 Emlak Analizi")
 
     try:
         fig1, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 4))
-        fig1.patch.set_facecolor('#2c2c2c')
-        ax1.set_facecolor('#2c2c2c')
-        ax2.set_facecolor('#2c2c2c')
+        fig1.patch.set_facecolor('#1e293b')
+        ax1.set_facecolor('#1e293b')
+        ax2.set_facecolor('#1e293b')
 
         c.execute("SELECT durum, COUNT(*) FROM emlak GROUP BY durum")
         durum_data = c.fetchall()
         if durum_data:
             labels = [row[0] for row in durum_data]
             sizes = [row[1] for row in durum_data]
-            colors_pie = ['#5e5e5e', '#4f4f4f', '#6e6e6e', '#888888', '#7d7d7d']
+            colors_pie = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6']
             ax1.pie(sizes, labels=labels, autopct='%1.1f%%',
                     colors=colors_pie[:len(sizes)], textprops={'color': 'white'})
             ax1.set_title('Emlak Durum Dağılımı', color='white')
@@ -100,7 +100,7 @@ def show_dashboard(root):
         if tur_data:
             turler = [row[0] for row in tur_data]
             sayilar = [row[1] for row in tur_data]
-            bar_colors = ['#5e5e5e', '#4f4f4f', '#6e6e6e', '#7d7d7d', '#888888']
+            bar_colors = ['#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#ef4444']
             ax2.bar(turler, sayilar, color=[bar_colors[i % len(bar_colors)] for i in range(len(turler))])
             ax2.set_title('Emlak Türü Dağılımı', color='white')
             ax2.tick_params(axis='x', rotation=30, colors='white')
@@ -111,17 +111,17 @@ def show_dashboard(root):
         canvas1.draw()
         canvas1.get_tk_widget().pack(fill=tk.BOTH, expand=True)
     except Exception as e:
-        tk.Label(tab1, text=f"Grafik yüklenemedi: {str(e)}", bg='#2c2c2c', fg='red').pack(pady=50)
+        tk.Label(tab1, text=f"Grafik yüklenemedi: {str(e)}", bg='#1e293b', fg='red').pack(pady=50)
 
     # ── Tab 2: Kaynak Dağılımı (Lead Analizi) ──
-    tab2 = tk.Frame(notebook, bg='#2c2c2c')
-    notebook.add(tab2, text=" Kaynak & Lead Analizi")
+    tab2 = tk.Frame(notebook, bg='#1e293b')
+    notebook.add(tab2, text="📡 Kaynak & Lead Analizi")
 
     try:
         fig2, (ax3, ax4) = plt.subplots(1, 2, figsize=(10, 4))
-        fig2.patch.set_facecolor('#2c2c2c')
-        ax3.set_facecolor('#2c2c2c')
-        ax4.set_facecolor('#2c2c2c')
+        fig2.patch.set_facecolor('#1e293b')
+        ax3.set_facecolor('#1e293b')
+        ax4.set_facecolor('#1e293b')
 
         # Kaynak dağılımı
         c.execute("""SELECT COALESCE(kaynak, 'Belirtilmemiş'), COUNT(*)
@@ -130,7 +130,7 @@ def show_dashboard(root):
         if kaynak_data:
             k_labels = [row[0] for row in kaynak_data]
             k_sizes = [row[1] for row in kaynak_data]
-            kaynak_colors = ['#25D366', '#5e5e5e', '#6e6e6e', '#888888', '#7d7d7d', '#777777']
+            kaynak_colors = ['#25D366', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6', '#64748b']
             ax3.pie(k_sizes, labels=k_labels, autopct='%1.1f%%',
                     colors=kaynak_colors[:len(k_sizes)], textprops={'color': 'white'})
             ax3.set_title('Müşteri Kaynak Dağılımı', color='white')
@@ -140,13 +140,13 @@ def show_dashboard(root):
             ax3.set_title('Müşteri Kaynak Dağılımı', color='white')
 
         # Etiket (lead kategori) dağılımı
-        c.execute("""SELECT COALESCE(etiket, '️ Soğuk Lead'), COUNT(*)
+        c.execute("""SELECT COALESCE(etiket, '❄️ Soğuk Lead'), COUNT(*)
                      FROM musteri GROUP BY etiket ORDER BY COUNT(*) DESC""")
         etiket_data = c.fetchall()
         if etiket_data:
             e_labels = [row[0] for row in etiket_data]
             e_sizes = [row[1] for row in etiket_data]
-            etiket_colors = ['#888888', '#6e6e6e', '#5e5e5e', '#22c55e', '#777777']
+            etiket_colors = ['#ef4444', '#f59e0b', '#3b82f6', '#22c55e', '#64748b']
             bars = ax4.barh(e_labels, e_sizes,
                             color=[etiket_colors[i % len(etiket_colors)] for i in range(len(e_labels))])
             ax4.set_title('Lead Etiket Dağılımı', color='white')
@@ -165,23 +165,23 @@ def show_dashboard(root):
         canvas2.draw()
         canvas2.get_tk_widget().pack(fill=tk.BOTH, expand=True)
     except Exception as e:
-        tk.Label(tab2, text=f"Grafik yüklenemedi: {str(e)}", bg='#2c2c2c', fg='red').pack(pady=50)
+        tk.Label(tab2, text=f"Grafik yüklenemedi: {str(e)}", bg='#1e293b', fg='red').pack(pady=50)
 
     # ── Tab 3: Popüler İlanlar & Dönüşüm ──
-    tab3 = tk.Frame(notebook, bg='#2c2c2c')
-    notebook.add(tab3, text=" Popüler İlanlar")
+    tab3 = tk.Frame(notebook, bg='#1e293b')
+    notebook.add(tab3, text="🔥 Popüler İlanlar")
 
     tk.Label(tab3, text="Favorilere eklenen ama henüz satılmayan/kiralanmayan ilanlar (Fiyat revizyonu önerilir):",
-             bg='#2c2c2c', fg='#94a3b8', font=("Arial", 10)).pack(pady=8)
+             bg='#1e293b', fg='#94a3b8', font=("Arial", 10)).pack(pady=8)
 
-    tree_frame = tk.Frame(tab3, bg='#2c2c2c')
+    tree_frame = tk.Frame(tab3, bg='#1e293b')
     tree_frame.pack(fill=tk.BOTH, expand=True, padx=15, pady=5)
 
-    cols = ('ID', 'Tür', 'Konum', 'Fiyat', 'Durum', '️ Favori', 'Eklenme Tarihi')
+    cols = ('ID', 'Tür', 'Konum', 'Fiyat', 'Durum', '❤️ Favori', 'Eklenme Tarihi')
     pop_tree = ttk.Treeview(tree_frame, columns=cols, show='headings', height=12)
     for col in cols:
         pop_tree.heading(col, text=col)
-        pop_tree.column(col, width=120 if col not in ('ID', '️ Favori') else 60)
+        pop_tree.column(col, width=120 if col not in ('ID', '❤️ Favori') else 60)
     pop_tree.pack(fill=tk.BOTH, expand=True)
 
     c.execute("""SELECT id, tur, konum, fiyat, durum,
@@ -193,10 +193,10 @@ def show_dashboard(root):
                         values=(row[0], row[1], row[2], f"{row[3]:,.0f}₺", row[4], row[5], row[6][:10]))
 
     # ── Tab 4: Dönüşüm Detayı ──
-    tab4 = tk.Frame(notebook, bg='#2c2c2c')
-    notebook.add(tab4, text=" Dönüşüm Analizi")
+    tab4 = tk.Frame(notebook, bg='#1e293b')
+    notebook.add(tab4, text="📈 Dönüşüm Analizi")
 
-    info_frame = tk.Frame(tab4, bg='#2c2c2c')
+    info_frame = tk.Frame(tab4, bg='#1e293b')
     info_frame.pack(fill=tk.X, padx=20, pady=10)
 
     def big_stat(label, val, color):
@@ -205,17 +205,17 @@ def show_dashboard(root):
         tk.Label(f, text=label, bg='#334155', fg='#94a3b8', font=("Arial", 11)).pack()
         tk.Label(f, text=val, bg='#334155', fg=color, font=("Arial", 22, "bold")).pack()
 
-    big_stat("Toplam Müşteri", str(toplam_musteri), "#5e5e5e")
-    big_stat("Randevuya Dönen", str(randevuya_donen_musteri), "#4f4f4f")
-    big_stat("Dönüşüm Oranı", f"%{donusum_orani:.1f}", "#6e6e6e")
+    big_stat("Toplam Müşteri", str(toplam_musteri), "#3b82f6")
+    big_stat("Randevuya Dönen", str(randevuya_donen_musteri), "#10b981")
+    big_stat("Dönüşüm Oranı", f"%{donusum_orani:.1f}", "#f59e0b")
     big_stat("Tamamlanan Gösterim", str(tamamlanan_randevu), "#22c55e")
-    big_stat("Gösterim Tamamlanma %", f"%{randevu_tamamlanma:.1f}", "#7d7d7d")
+    big_stat("Gösterim Tamamlanma %", f"%{randevu_tamamlanma:.1f}", "#8b5cf6")
 
     # Kaynak bazlı başarı tablosu
     tk.Label(tab4, text="Kaynak Bazlı Müşteri Dağılımı:",
-             bg='#2c2c2c', fg='white', font=("Arial", 12, "bold")).pack(pady=(10, 5))
+             bg='#1e293b', fg='white', font=("Arial", 12, "bold")).pack(pady=(10, 5))
 
-    tree2_f = tk.Frame(tab4, bg='#2c2c2c')
+    tree2_f = tk.Frame(tab4, bg='#1e293b')
     tree2_f.pack(fill=tk.BOTH, expand=True, padx=15)
 
     cols2 = ('Kaynak', 'Müşteri Sayısı', 'Ort. Skor', 'Yüksek Skor (≥60)')

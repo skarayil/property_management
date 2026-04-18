@@ -24,20 +24,20 @@ def show_emlak_menu(root, show_main_menu_cb):
     for widget in root.winfo_children():
         widget.destroy()
 
-    main_frame = tk.Frame(root, bg="#1e1e1e")
+    main_frame = tk.Frame(root, bg="#0f172a")
     main_frame.pack(fill=tk.BOTH, expand=True, padx=15, pady=15)
 
     tk.Label(
         main_frame,
-        text=" EMLAK YÖNETİMİ & PORTFÖY EŞLEŞTİRME",
-        font=("Arial", 16, "bold"), bg="#1e1e1e", fg="white",
+        text="🏠 EMLAK YÖNETİMİ & PORTFÖY EŞLEŞTİRME",
+        font=("Arial", 16, "bold"), bg="#0f172a", fg="white",
     ).pack(pady=15)
 
-    content_frame = tk.Frame(main_frame, bg="#1e1e1e")
+    content_frame = tk.Frame(main_frame, bg="#0f172a")
     content_frame.pack(fill=tk.BOTH, expand=True)
 
     # ── Sol Panel – Scrollable Form ─────────────────────────────────────────
-    left_panel = tk.Frame(content_frame, bg="#2c2c2c", width=370)
+    left_panel = tk.Frame(content_frame, bg="#1e293b", width=370)
     left_panel.pack(side=tk.LEFT, fill=tk.Y, padx=(0, 15))
     left_panel.pack_propagate(False)
 
@@ -59,7 +59,7 @@ def show_emlak_menu(root, show_main_menu_cb):
         tk.Label(form_frame, text=text, bg="#334155", fg="#e2e8f0").pack(anchor="w", padx=15)
 
     def entry_widget():
-        e = tk.Entry(form_frame, width=34, bg="#2c2c2c", fg="white", insertbackground="white")
+        e = tk.Entry(form_frame, width=34, bg="#1e293b", fg="white", insertbackground="white")
         e.pack(pady=(2, 8), padx=15)
         return e
 
@@ -93,7 +93,7 @@ def show_emlak_menu(root, show_main_menu_cb):
     # ── Müsaitlik Takvimi ────────────────────────────────────────────────────
     tk.Label(
         form_frame, text="━━ MÜSAİTLİK TAKVİMİ ━━",
-        font=("Arial", 10, "bold"), bg="#334155", fg="#6e6e6e"
+        font=("Arial", 10, "bold"), bg="#334155", fg="#f59e0b"
     ).pack(pady=(8, 4))
 
     lbl("Müsait Günler (örn: Pazartesi-Cuma)")
@@ -103,7 +103,7 @@ def show_emlak_menu(root, show_main_menu_cb):
 
     lbl("Açıklama")
     crud.text_aciklama = tk.Text(
-        form_frame, width=34, height=3, bg="#2c2c2c", fg="white", insertbackground="white"
+        form_frame, width=34, height=3, bg="#1e293b", fg="white", insertbackground="white"
     )
     crud.text_aciklama.pack(pady=(2, 8), padx=15)
 
@@ -111,11 +111,11 @@ def show_emlak_menu(root, show_main_menu_cb):
     lbl("Fotoğraf")
     pf = tk.Frame(form_frame, bg="#334155")
     pf.pack(fill=tk.X, padx=15, pady=2)
-    tk.Button(pf, text=" Seç", command=crud.select_photo, bg="#5e5e5e", fg="white", width=10).pack(side=tk.LEFT)
+    tk.Button(pf, text="📷 Seç", command=crud.select_photo, bg="#3b82f6", fg="white", width=10).pack(side=tk.LEFT)
     tk.Button(
-        pf, text=" Görüntüle",
+        pf, text="👁 Görüntüle",
         command=lambda: crud.view_emlak_photo(root),
-        bg="#7d7d7d", fg="white", width=10
+        bg="#8b5cf6", fg="white", width=10
     ).pack(side=tk.RIGHT)
     crud.photo_label = tk.Label(form_frame, text="Fotoğraf Seçilmedi", bg="#334155", fg="#BDC3C7")
     crud.photo_label.pack(pady=2)
@@ -131,12 +131,12 @@ def show_emlak_menu(root, show_main_menu_cb):
                 reverse_matching_check(root, nid, tur, fiyat, oda, durum)
         )
 
-    crud.btn_save_emlak = create_modern_button(btn_frame, " Kaydet", _add_and_match, "#4f4f4f", width=13)
+    crud.btn_save_emlak = create_modern_button(btn_frame, "💾 Kaydet", _add_and_match, "#10b981", width=13)
     crud.btn_save_emlak.pack(side=tk.LEFT, padx=5)
-    create_modern_button(btn_frame, " Temizle", crud.clear_emlak_entries, "#6e6e6e", width=12).pack(side=tk.LEFT, padx=5)
+    create_modern_button(btn_frame, "🗑 Temizle", crud.clear_emlak_entries, "#f59e0b", width=12).pack(side=tk.LEFT, padx=5)
 
     # ── Sağ Panel – Liste ─────────────────────────────────────────────────────
-    right_panel = tk.Frame(content_frame, bg="#2c2c2c")
+    right_panel = tk.Frame(content_frame, bg="#1e293b")
     right_panel.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True)
 
     tk.Label(
@@ -146,9 +146,9 @@ def show_emlak_menu(root, show_main_menu_cb):
 
     search_frame = tk.Frame(right_panel, bg="#334155")
     search_frame.pack(fill=tk.X, padx=15, pady=8)
-    tk.Label(search_frame, text=" Arama:", bg="#334155", fg="white").pack(side=tk.LEFT)
+    tk.Label(search_frame, text="🔍 Arama:", bg="#334155", fg="white").pack(side=tk.LEFT)
     crud.entry_search_emlak = tk.Entry(
-        search_frame, bg="#2c2c2c", fg="white", insertbackground="white"
+        search_frame, bg="#1e293b", fg="white", insertbackground="white"
     )
     crud.entry_search_emlak.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=(8, 5))
     create_modern_button(
@@ -161,8 +161,8 @@ def show_emlak_menu(root, show_main_menu_cb):
     sb = tk.Scrollbar(list_frame)
     sb.pack(side=tk.RIGHT, fill=tk.Y)
     crud.listbox_emlak = tk.Listbox(
-        list_frame, font=("Consolas", 8), bg="#2c2c2c", fg="#F0F6FC",
-        height=15, yscrollcommand=sb.set, selectbackground="#5e5e5e"
+        list_frame, font=("Consolas", 8), bg="#1e293b", fg="#F0F6FC",
+        height=15, yscrollcommand=sb.set, selectbackground="#3b82f6"
     )
     crud.listbox_emlak.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
     sb.config(command=crud.listbox_emlak.yview)
@@ -173,13 +173,13 @@ def show_emlak_menu(root, show_main_menu_cb):
 
     row1 = tk.Frame(bottom_frame, bg="#334155")
     row1.pack()
-    create_modern_button(row1, "️ Düzenle",  crud.edit_emlak,   "#6e6e6e").pack(side=tk.LEFT, padx=4)
-    create_modern_button(row1, "️ Sil",      crud.delete_emlak, "#888888").pack(side=tk.LEFT, padx=4)
-    create_modern_button(row1, " Yenile",   crud.list_emlak,   "#334155").pack(side=tk.LEFT, padx=4)
-    create_modern_button(row1, "️ Favori+1", crud.favori_ekle,  "#e11d48", width=12).pack(side=tk.LEFT, padx=4)
+    create_modern_button(row1, "✏️ Düzenle",  crud.edit_emlak,   "#f59e0b").pack(side=tk.LEFT, padx=4)
+    create_modern_button(row1, "🗑️ Sil",      crud.delete_emlak, "#ef4444").pack(side=tk.LEFT, padx=4)
+    create_modern_button(row1, "🔄 Yenile",   crud.list_emlak,   "#334155").pack(side=tk.LEFT, padx=4)
+    create_modern_button(row1, "❤️ Favori+1", crud.favori_ekle,  "#e11d48", width=12).pack(side=tk.LEFT, padx=4)
 
     create_modern_button(
-        root, " Ana Menü", lambda: show_main_menu_cb(root), "#5c5c5c", width=20, height=2
+        root, "🏠 Ana Menü", lambda: show_main_menu_cb(root), "#d946ef", width=20, height=2
     ).pack(pady=12)
 
     crud.list_emlak()

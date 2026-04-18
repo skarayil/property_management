@@ -29,16 +29,16 @@ def show_musteri_menu(root, show_main_menu_cb):
     for widget in root.winfo_children():
         widget.destroy()
 
-    main_frame = tk.Frame(root, bg="#1e1e1e")
+    main_frame = tk.Frame(root, bg="#0f172a")
     main_frame.pack(fill=tk.BOTH, expand=True, padx=15, pady=15)
 
     tk.Label(
         main_frame,
-        text=" MÜŞTERİ YÖNETİMİ & LEAD SKORLAMA",
-        font=("Arial", 16, "bold"), bg="#1e1e1e", fg="white",
+        text="👥 MÜŞTERİ YÖNETİMİ & LEAD SKORLAMA",
+        font=("Arial", 16, "bold"), bg="#0f172a", fg="white",
     ).pack(pady=15)
 
-    content_frame = tk.Frame(main_frame, bg="#1e1e1e")
+    content_frame = tk.Frame(main_frame, bg="#0f172a")
     content_frame.pack(fill=tk.BOTH, expand=True)
 
     # ── Sol Panel – Form ────────────────────────────────────────────────────
@@ -67,7 +67,7 @@ def show_musteri_menu(root, show_main_menu_cb):
         tk.Label(form_scroll, text=text, bg="#334155", fg="#e2e8f0").pack(anchor="w", padx=15)
 
     def entry_widget():
-        e = tk.Entry(form_scroll, width=32, bg="#2c2c2c", fg="white", insertbackground="white")
+        e = tk.Entry(form_scroll, width=32, bg="#1e293b", fg="white", insertbackground="white")
         e.pack(pady=(2, 8), padx=15)
         return e
 
@@ -83,7 +83,7 @@ def show_musteri_menu(root, show_main_menu_cb):
     # ── Lead Skorlama ──────────────────────────────────────────────────────
     tk.Label(
         form_scroll, text="━━ LEAD SKORLAMA ━━",
-        font=("Arial", 10, "bold"), bg="#334155", fg="#6e6e6e"
+        font=("Arial", 10, "bold"), bg="#334155", fg="#f59e0b"
     ).pack(pady=(8, 4))
 
     lbl("Bütçe (₺)");      crud.entry_butce    = entry_widget()
@@ -106,7 +106,7 @@ def show_musteri_menu(root, show_main_menu_cb):
 
     lbl("Adres")
     crud.text_adres = tk.Text(
-        form_scroll, width=32, height=3, bg="#2c2c2c", fg="white", insertbackground="white"
+        form_scroll, width=32, height=3, bg="#1e293b", fg="white", insertbackground="white"
     )
     crud.text_adres.pack(pady=(2, 8), padx=15)
 
@@ -115,11 +115,11 @@ def show_musteri_menu(root, show_main_menu_cb):
     btn_frame.pack(pady=15)
 
     crud.btn_save_musteri = create_modern_button(
-        btn_frame, " Kaydet", crud.add_musteri, "#2196F3", width=13
+        btn_frame, "💾 Kaydet", crud.add_musteri, "#2196F3", width=13
     )
     crud.btn_save_musteri.pack(side=tk.LEFT, padx=5)
     create_modern_button(
-        btn_frame, " Temizle", crud.clear_musteri_entries, "#6e6e6e", width=12
+        btn_frame, "🗑 Temizle", crud.clear_musteri_entries, "#f59e0b", width=12
     ).pack(side=tk.LEFT, padx=5)
 
     # ── Sağ Panel – Liste ────────────────────────────────────────────────────
@@ -134,9 +134,9 @@ def show_musteri_menu(root, show_main_menu_cb):
 
     search_frame = tk.Frame(right_panel, bg="#334155")
     search_frame.pack(fill=tk.X, padx=15, pady=8)
-    tk.Label(search_frame, text=" Ara:", bg="#334155", fg="white").pack(side=tk.LEFT)
+    tk.Label(search_frame, text="🔍 Ara:", bg="#334155", fg="white").pack(side=tk.LEFT)
     crud.entry_search_musteri = tk.Entry(
-        search_frame, bg="#2c2c2c", fg="white", insertbackground="white"
+        search_frame, bg="#1e293b", fg="white", insertbackground="white"
     )
     crud.entry_search_musteri.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=(8, 5))
     create_modern_button(
@@ -149,8 +149,8 @@ def show_musteri_menu(root, show_main_menu_cb):
     sb = tk.Scrollbar(list_frame)
     sb.pack(side=tk.RIGHT, fill=tk.Y)
     crud.listbox_musteri = tk.Listbox(
-        list_frame, font=("Consolas", 8), bg="#2c2c2c", fg="#F0F6FC",
-        height=15, yscrollcommand=sb.set, selectbackground="#5e5e5e"
+        list_frame, font=("Consolas", 8), bg="#1e293b", fg="#F0F6FC",
+        height=15, yscrollcommand=sb.set, selectbackground="#3b82f6"
     )
     crud.listbox_musteri.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
     sb.config(command=crud.listbox_musteri.yview)
@@ -161,32 +161,32 @@ def show_musteri_menu(root, show_main_menu_cb):
 
     row1 = tk.Frame(bottom_frame, bg="#334155")
     row1.pack()
-    create_modern_button(row1, "️ Düzenle",  crud.edit_musteri,   "#6e6e6e").pack(side=tk.LEFT, padx=4)
-    create_modern_button(row1, "️ Sil",      crud.delete_musteri, "#888888").pack(side=tk.LEFT, padx=4)
-    create_modern_button(row1, " Yenile",   crud.list_musteri,   "#334155").pack(side=tk.LEFT, padx=4)
+    create_modern_button(row1, "✏️ Düzenle",  crud.edit_musteri,   "#f59e0b").pack(side=tk.LEFT, padx=4)
+    create_modern_button(row1, "🗑️ Sil",      crud.delete_musteri, "#ef4444").pack(side=tk.LEFT, padx=4)
+    create_modern_button(row1, "🔄 Yenile",   crud.list_musteri,   "#334155").pack(side=tk.LEFT, padx=4)
     create_modern_button(
-        row1, " Evraklar",
+        row1, "📁 Evraklar",
         lambda: show_evrak_yonetim(root, crud.listbox_musteri),
-        "#7d7d7d", width=12
+        "#8b5cf6", width=12
     ).pack(side=tk.LEFT, padx=4)
 
     row2 = tk.Frame(bottom_frame, bg="#334155")
     row2.pack(pady=6)
     create_modern_button(
-        row2, " WhatsApp",
+        row2, "💬 WhatsApp",
         lambda: whatsapp_mesaj_gonder(crud.listbox_musteri),
         "#25D366", width=16
     ).pack(side=tk.LEFT, padx=4)
     create_modern_button(
-        row2, " Takip Merkezi",
+        row2, "🔔 Takip Merkezi",
         lambda: show_takip_paneli(root),
-        "#6e6e6e", width=16
+        "#f59e0b", width=16
     ).pack(side=tk.LEFT, padx=4)
 
     create_modern_button(
-        root, " Ana Menü",
+        root, "🏠 Ana Menü",
         lambda: show_main_menu_cb(root),
-        "#5c5c5c", width=20, height=2
+        "#d946ef", width=20, height=2
     ).pack(pady=12)
 
     crud.list_musteri()

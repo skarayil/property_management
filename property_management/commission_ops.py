@@ -12,7 +12,7 @@ def show_komisyon_menu(root, show_main_menu_cb):
     kom_window = tk.Frame(root, bg='#334155')
     kom_window.pack(fill=tk.BOTH, expand=True, padx=200, pady=50)
 
-    tk.Label(kom_window, text=" KOMİSYON HESAPLAMA", font=("Arial", 16, "bold"),
+    tk.Label(kom_window, text="💰 KOMİSYON HESAPLAMA", font=("Arial", 16, "bold"),
              bg='#334155', fg='white').pack(pady=20)
 
     tk.Label(kom_window, text="Emlak:", bg='#334155', fg='white').pack()
@@ -99,7 +99,7 @@ def show_komisyon_menu(root, show_main_menu_cb):
     btn_frame = tk.Frame(kom_window, bg='#334155')
     btn_frame.pack(pady=20)
 
-    tk.Button(btn_frame, text=" Hesapla", command=hesapla, bg="#5e5e5e", fg="white", width=12).pack(side=tk.LEFT, padx=10)
-    tk.Button(btn_frame, text=" Kaydet", command=kaydet, bg="#4f4f4f", fg="white", width=12).pack(side=tk.LEFT, padx=10)
+    tk.Button(btn_frame, text="🧮 Hesapla", command=hesapla, bg="#3b82f6", fg="white", width=12).pack(side=tk.LEFT, padx=10)
+    tk.Button(btn_frame, text="💾 Kaydet", command=kaydet, bg="#10b981", fg="white", width=12).pack(side=tk.LEFT, padx=10)
     
-    create_modern_button(root, " Ana Menü", lambda: show_main_menu_cb(root), "#5c5c5c", width=20, height=2).pack(pady=15)
+    create_modern_button(root, "🏠 Ana Menü", lambda: show_main_menu_cb(root), "#d946ef", width=20, height=2).pack(pady=15)
